@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feedback"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#228CFC">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_black"
+        android:text="Feedback"
+        android:layout_centerHorizontal="true"
+        android:textColor="#228CFC"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/sharethoughts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_title"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Share Your Thoughts"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <!-- Main content area -->
+    <ScrollView
+        android:id="@+id/feedback_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sharethoughts"
+        android:layout_marginTop="18dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_height="200dp"
+            android:layout_width="match_parent">
+
+            <!-- Feedback input fields -->
+            <EditText
+                android:id="@+id/feedback_text"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:padding="10dp"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="Write your feedback here..."/>
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:isIndicator="false"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/submit_button"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Submit Feedback"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_regular"
+                android:background="@drawable/button_background"
+                android:layout_marginStart="20dp"
+                android:layout_below="@id/feedback_content"
+                android:layout_centerHorizontal="true"/>
+
+    <FrameLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:paddingTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/home"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+
+            <ImageButton
+                android:id="@+id/visitorButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/doorbell"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/feedbackButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/feedbackblue"
+                android:contentDescription="@null"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/helpcenterButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/helpcenter"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/settings"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/logout"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</RelativeLayout>

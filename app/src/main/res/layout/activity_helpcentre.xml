@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".helpcentre"
+    android:background="#228CFC">
+
+    <TextView
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="@color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_black"
+        android:text="Help Centre"
+        android:layout_centerHorizontal="true"
+        android:textColor="#228CFC"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/help_center_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:text="FAQs"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <ScrollView
+        android:id="@+id/faq_list"
+        android:layout_below="@+id/help_center_subtitle"
+        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/customersupport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact tfsmartknock@gmail.com for customer support"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/montserrat_regular"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_title"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/button_background"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:paddingHorizontal="10sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What is a smart doorbell?"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A smart doorbell is an internet-connected video camera that is mounted on or near your front door. It allows you to see, hear, and speak with visitors remotely through your smartphone app, even when you're not at home."
+                android:textSize="17sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_regular"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/button_background"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingHorizontal="10sp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="What should I do if my smart doorbell is not connecting to Wi-Fi?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ensure that your Wi-Fi network is stable and within range of the doorbell. If the issue persists, try restarting both your router and the smart doorbell, and check for firmware updates."
+                        android:textSize="17sp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_regular"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/button_background"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingHorizontal="10sp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Can I access my smart doorbell remotely?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes, SmartKnock allows remote access via smartphone apps. You can receive notifications and know who visited your door from anywhere with internet connectivity."
+                        android:textSize="17sp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/button_background"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:paddingHorizontal="10sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="What happens during DND mode?"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notifications are suppressed during the set DND hours, but all events are still logged for later review."
+                    android:textSize="17sp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+            </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/button_background"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingHorizontal="10sp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Can I view a log of past visitors?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes, the visitor history section in the app provides images, timestamps, and relevant data for all visitors."
+                        android:textSize="17sp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_title"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/button_background"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:paddingHorizontal="10sp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="What should I do if the notification system fails?"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="If there’s a connectivity or server issue, the system will retry sending the notification and log the event for future reference. Ensure your device has internet access."
+                        android:textSize="17sp"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/montserrat_regular"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <FrameLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:paddingTop="20dp"
+                android:background="@color/white">
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:paddingTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/home"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+
+            <ImageButton
+                android:id="@+id/visitorButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/doorbell"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/feedbackButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/feedback"
+                android:contentDescription="@null"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/helpcenterButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/helpcenterblue"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/settings"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/logout"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+
+</RelativeLayout>

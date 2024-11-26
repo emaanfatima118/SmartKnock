@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#228CFC"
+    tools:context=".login"
+    android:padding="18dp">
+
+    <TextView
+        android:id="@+id/loginTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:fontFamily="@font/montserrat_bold"/>
+
+    <EditText
+        android:id="@+id/loginUsername"
+        android:layout_below="@id/loginTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Username"
+        android:textColorHint="#98090909"
+        android:textColor="@color/black"
+        android:background="@drawable/edittext"
+        android:layout_marginTop="50sp"
+        android:inputType="textPersonName"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@drawable/userlogin"
+        android:drawablePadding="15dp"
+        android:paddingStart="20dp"/>
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        app:endIconMode="password_toggle"-->
+<!--        android:id="@+id/dd"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:hint="Password"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:paddingStart="25dp"-->
+<!--        android:layout_below="@+id/cc"-->
+<!--        android:background="@drawable/edittext">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:drawableStart="@drawable/locklogin"-->
+<!--            android:drawablePadding="10dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:inputType="textPassword"/>-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_below="@id/loginUsername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:textColorHint="#98090909"
+        android:textColor="@color/black"
+        android:hint="Password"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/edittext"
+        android:inputType="textPassword"
+        android:backgroundTint="@color/white"
+        android:drawableStart="@drawable/locklogin"
+        android:drawablePadding="15dp"
+        android:paddingStart="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="90dp"
+        android:text="Login"
+        android:layout_below="@id/loginPassword"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_background"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        android:textAllCaps="false"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create new account"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="@color/black"
+            android:fontFamily="@font/montserrat_regular"
+            android:background="@drawable/textbutton"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
