@@ -1,4 +1,3 @@
-**Smart Knock App**
 Smart Knock is an innovative mobile application designed to enhance home security and convenience. The app allows homeowners to control their smart doorbell system, manage visitor entries, and configure security settings with added features like biometric authentication.
 
 **Features**
@@ -14,5 +13,4 @@ Smart Knock is an innovative mobile application designed to enhance home securit
 - Java
 - Firebase account (for database, authentication, and notifications)
 
-**Contributing**
 We welcome contributions! If you'd like to improve the app or fix a bug, feel free to fork the repository and submit a pull request.
