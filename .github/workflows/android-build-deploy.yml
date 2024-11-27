@@ -1,0 +1,69 @@
+name: Android Build and Deploy Workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger workflow on pushes to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger workflow on pull requests to 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the code
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up JDK (Java Development Kit)
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # Use OpenJDK distribution
+          java-version: '17'   # Use the same Java version as in Android Studio
+
+      # Step 3: Set up Android SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          api-level: 33           # Target API level for your app
+          build-tools: 33.0.2     # Build tools version specified in build.gradle
+          ndk: '23.1.7779620'     # Optional: Add NDK version if your app uses it
+
+      # Step 4: Build APK with Gradle
+      - name: Build APK
+        run: ./gradlew assembleRelease
+
+      # Step 5: Upload APK as an Artifact (Optional)
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Add SSH Key (for secure access to server/VM)
+      - name: Add SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}  # Add this in GitHub Secrets
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}  # Add your server's host
+
+      # Step 2: Deploy APK to the Server
+      - name: Deploy APK to Server
+        run: |
+          ssh user@your-server-ip <<EOF
+            mkdir -p ~/android-app  # Create a directory if it doesn’t exist
+            exit
+          EOF
+
+      # Step 3: Copy the APK to the Server
+      - name: Copy APK to Server
+        run: scp app/build/outputs/apk/release/app-release.apk user@your-server-ip:~/android-app/
+
