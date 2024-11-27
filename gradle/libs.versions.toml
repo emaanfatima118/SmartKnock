@@ -13,6 +13,8 @@ googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 annotationJvm = "1.9.1"
 glide = "4.15.1"
+navigationFragment = "2.8.4"
+navigationUi = "2.8.4"
 
 [libraries]
 compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "compiler" }
@@ -28,6 +30,8 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database",
 annotation-jvm = { group = "androidx.annotation", name = "annotation-jvm", version.ref = "annotationJvm" }
 glide = { module = "com.github.bumptech.glide:glide", version = "4.15.1" }
 glide-ksp = { module = "com.github.bumptech.glide:ksp", version = "4.15.1" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

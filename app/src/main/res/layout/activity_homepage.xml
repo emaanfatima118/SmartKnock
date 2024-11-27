@@ -68,7 +68,7 @@
                 android:id="@+id/device_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(device id)"
+                android:text="Model 12A8"
                 android:textColor="@color/black"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"

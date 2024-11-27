@@ -71,7 +71,31 @@
         android:drawableStart="@drawable/locklogin"
         android:drawablePadding="15dp"
         android:paddingStart="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:id="@+id/l1"
+        android:layout_below="@id/loginPassword">
 
+        <CheckBox
+            android:id="@+id/adminCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login as Admin"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+
+        <CheckBox
+            android:id="@+id/userCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Login as User"
+            android:textSize="16sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/loginButton"
         android:layout_width="200dp"
@@ -79,7 +103,7 @@
         android:layout_marginTop="70dp"
         android:layout_marginLeft="90dp"
         android:text="Login"
-        android:layout_below="@id/loginPassword"
+        android:layout_below="@id/l1"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat_regular"

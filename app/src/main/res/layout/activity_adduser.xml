@@ -2,17 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="#228CFC"
-    tools:context=".signup"
     android:padding="18dp">
+    <ImageView
+        android:id="@+id/btn2"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:src="@drawable/back"
 
+        />
     <TextView
         android:id="@+id/signupTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
-        android:layout_marginTop="30dp"
+        android:text="ADD USER"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="140dp"
         android:textColor="@color/white"
         android:textSize="28sp"
@@ -26,7 +30,7 @@
         android:textColorHint="#98090909"
         android:hint="Username"
         android:background="@drawable/edittext"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="50sp"
         android:inputType="textPersonName"
         android:backgroundTint="@color/white"
         android:drawableStart="@drawable/userlogin"
@@ -100,6 +104,7 @@
         android:textColor="@color/black"
         android:paddingStart="20dp"
         android:layout_below="@id/box1"/>
+    <!-- Checkboxes -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,39 +114,31 @@
         android:id="@+id/l1"
         android:layout_below="@+id/box2"
         >
-        <CheckBox
-            android:id="@+id/adminCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sign up as Admin"
-            android:layout_below="@+id/signupButton"/>
 
-        <CheckBox
-            android:id="@+id/userCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/adminCheckBox"
-            android:text="Sign up as User" />
     </LinearLayout>
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signupButton"
         android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="70dp"
         android:layout_centerHorizontal="true"
-        android:text="Sign Up"
+        android:text="ADD"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@color/black"
         android:textSize="21sp"
         android:textAllCaps="false"
-        android:layout_below="@id/l1"/>
+        android:layout_below="@id/box2"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="60dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/signupButton">
 
         <TextView

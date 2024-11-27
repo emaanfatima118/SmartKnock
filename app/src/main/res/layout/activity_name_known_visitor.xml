@@ -52,6 +52,7 @@
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
             android:text="Save"
+            android:textColor="@color/black"
             android:background="@drawable/button_background"
             android:fontFamily="@font/montserrat_regular" />
     <androidx.appcompat.widget.AppCompatButton
@@ -62,6 +63,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/save_name_button"
         android:text="Back"
+        android:textColor="@color/black"
         android:background="@drawable/button_background"
         android:fontFamily="@font/montserrat_regular" />
     <FrameLayout

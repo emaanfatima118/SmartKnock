@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:id="@+id/dnd"
+    android:background="#228CFC">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="30dp"
+        android:background="#1C024B">
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"
+
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DND Settings"
+            android:textSize="24sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- DND Mode Toggle -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enable DND Mode"
+            android:textSize="16sp"
+            android:layout_marginStart="10dp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_vertical" />
+
+        <Switch
+            android:id="@+id/dndSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_gravity="center_vertical"
+            android:minWidth="64dp"
+            android:minHeight="48dp"
+            android:padding="8dp" />
+    </LinearLayout>
+
+    <!-- Access Control Section -->
+
+    <!-- Repeat Settings -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="16dp"
+            android:text="Schedule Alerts"
+            android:textColor="#000000"
+            android:textSize="18sp"
+
+            android:textStyle="bold" />
+
+
+        <!-- Start Time Dropdown -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="Start Time"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/startTimeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#333645"
+                android:entries="@array/time_options" />
+        </LinearLayout>
+
+        <!-- End Time Dropdown -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:text="End Time"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/endTimeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#333645"
+                android:entries="@array/time_options" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repeat Settings"
+        android:textSize="18sp"
+        android:layout_marginStart="5dp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/black" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+        <CheckBox
+            android:id="@+id/recognizedVisitorCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekends"
+            android:layout_marginStart="10dp"/>
+
+
+
+        <CheckBox
+            android:id="@+id/unrecognizedVisitorCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weekdays"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>

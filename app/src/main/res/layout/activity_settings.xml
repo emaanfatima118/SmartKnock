@@ -1,10 +1,211 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".settings">
+    android:orientation="vertical"
+    android:id="@+id/hell"
+    android:background="#228CFC">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Title Section -->
+    <LinearLayout
+        android:id="@+id/header_title"
+        android:layout_width="match_parent"
+        android:layout_height="86dp"
+        android:background="@color/white">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/montserrat_black"
+            android:text="Settings"
+            android:layout_marginHorizontal="130dp"
+            android:textColor="#228CFC"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Notification Settings -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/notif"
+            android:layout_marginEnd="12dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_notification_settings"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Notification Settings"
+            android:textSize="18sp"
+            android:paddingRight="50dp"
+            android:background="@drawable/btn"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- User Management Settings -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/user"
+            android:layout_marginEnd="12dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_user_management_settings"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="User Management"
+            android:textSize="18sp"
+            android:paddingRight="80dp"
+            android:background="@drawable/btn"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- DND Mode -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/dnd"
+            android:layout_marginEnd="12dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dnd_mode"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="DND MODE"
+            android:textSize="18sp"
+            android:paddingRight="160dp"
+            android:background="@drawable/btn"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Visitor Settings -->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_marginBottom="12dp"-->
+<!--        android:gravity="center_vertical">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:src="@drawable/vis"-->
+<!--            android:layout_marginEnd="12dp" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_visitor_settings"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="Visitor Settings"-->
+<!--            android:textSize="18sp"-->
+<!--            android:paddingRight="90dp"-->
+<!--            android:background="@drawable/btn"-->
+<!--            android:textColor="@color/white" />-->
+<!--    </LinearLayout>-->
+    <FrameLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="96dp"
+        android:layout_marginTop="335dp"
+        android:paddingTop="20dp"
+        android:background="@color/white">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageButton
+                android:id="@+id/homeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/home"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+
+            <ImageButton
+                android:id="@+id/visitorButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/doorbell"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/feedbackButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/feedback"
+                android:contentDescription="@null"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/helpcenterButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/helpcenter"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/settingsblue"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"
+                />
+
+            <ImageButton
+                android:id="@+id/logoutButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/logout"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>
+

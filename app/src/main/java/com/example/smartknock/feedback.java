@@ -73,7 +73,31 @@ public class feedback extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        helpp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(feedback.this, helpcentre.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(feedback.this, settings.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        visitors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(feedback.this, visitors.class);
+                startActivity(i);
+                finish();
+            }
+        });
         // Similarly, set up other buttons for navigation
     }
 }

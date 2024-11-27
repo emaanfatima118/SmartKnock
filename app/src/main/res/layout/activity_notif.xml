@@ -1,0 +1,250 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/notif"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="#228CFC">
+<!--    tools:context=".notify"-->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="20dp"
+        android:background="#1C024B">
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="32dp"
+            android:layout_height="30dp"
+            android:src="@drawable/back"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="24sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <!-- User Profiles Section -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notification Types"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#1C024B"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:background="@drawable/email"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email Alerts"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+               android:shadowColor="#333645"
+                android:layout_marginLeft="55dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:src="@drawable/sms"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SMS Alerts"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:shadowColor="#333645"
+                android:layout_marginLeft="60dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Access Control Section -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schedule Alerts"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#1C024B"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+
+        <!-- Start Time Dropdown -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Time"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="16dp"/>
+
+            <Spinner
+                android:id="@+id/startTimeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#333645"
+                android:entries="@array/time_options" />
+        </LinearLayout>
+
+        <!-- End Time Dropdown -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Time"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="16dp"/>
+
+            <Spinner
+                android:id="@+id/endTimeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1"
+                android:background="#333645"
+                android:entries="@array/time_options" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Invitations Section -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disable Notifications"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#1C024B"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <ImageView
+                android:src="@drawable/noti"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disable Alerts"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:shadowColor="#333645"
+                android:layout_marginLeft="40dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- User Management Section -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+
+    </LinearLayout>
+</LinearLayout>

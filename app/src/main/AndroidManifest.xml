@@ -13,6 +13,33 @@
         android:theme="@style/Theme.SMARTKNOCK"
         tools:targetApi="31">
         <activity
+            android:name=".admin_homepage"
+            android:exported="false" />
+        <activity android:name=".management"
+            android:exported="false" />
+        <activity
+            android:name=".notify"
+            android:exported="false" />
+        <activity
+            android:name=".dnd"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".setdev"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name=".adduser"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".admin_homepage"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".feedbackitem"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.DOORBELL" />-->
+<!--        <activity-->
+<!--            android:name=".feedbackadmin"-->
+<!--            android:exported="false" />-->
+        <activity
             android:name=".nameKnownVisitor"
             android:exported="false" />
         <activity
