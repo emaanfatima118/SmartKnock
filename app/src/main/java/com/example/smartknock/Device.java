@@ -1,24 +1,24 @@
 package com.example.smartknock;
 
-
-import java.util.List;
-
 public class Device {
     private String deviceId;
-    private String pin;
-    private List<String> users;
 
-    // No-arg constructor for Firestore deserialization
-    public Device() {}
+    private Integer pin;
+    private Boolean status;
 
-    // Constructor
-    public Device(String deviceId, String pin, List<String> users) {
-        this.deviceId = deviceId;
-        this.pin = pin;
-        this.users = users;
+    public Boolean getStatus() {
+        return status;
     }
 
-    // Getters and setters
+
+    // Constructor
+    public Device(String deviceId, Integer pin) {
+        this.deviceId = deviceId;
+        this.pin = pin;
+
+    }
+
+    // Getters and Setters
     public String getDeviceId() {
         return deviceId;
     }
@@ -27,19 +27,11 @@ public class Device {
         this.deviceId = deviceId;
     }
 
-    public String getPin() {
+    public Integer getPin() {
         return pin;
     }
 
-    public void setPin(String pin) {
+    public void setPin(Integer pin) {
         this.pin = pin;
-    }
-
-    public List<String> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<String> users) {
-        this.users = users;
     }
 }

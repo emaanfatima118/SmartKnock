@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class adduser extends AppCompatActivity {
 
+    private AuthenticationHelper authhelp;
     private EditText userNameInput;
     private EditText userEmailInput;
     private EditText userPasswordInput;
@@ -35,8 +36,7 @@ public class adduser extends AppCompatActivity {
         deviceIdInput = findViewById(R.id.box1);
         saveUserButton = findViewById(R.id.signupButton);
 
-        // Initialize DatabaseHelper
-        dbHelper = new DatabaseHelper();
+       authhelp = new AuthenticationHelper();
 
         ImageView backButton = findViewById(R.id.btn2);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -68,7 +68,7 @@ public class adduser extends AppCompatActivity {
             user.put("user_type", "Secondary User"); // Set user type to Secondary User
 
             // Add user via DatabaseHelper
-            dbHelper.addUser(user, new DatabaseHelper.DataStatus() {
+            authhelp.addUser(user, new AuthenticationHelper.DataStatus() {
                 @Override
                 public void DataIsLoaded(List<User> users, String message) {
                     // Optionally handle this case if needed
@@ -84,13 +84,12 @@ public class adduser extends AppCompatActivity {
                     Toast.makeText(adduser.this, message, Toast.LENGTH_SHORT).show();
 
 
-                        // Navigate back
-                        Intent i= new Intent(adduser.this,admin_homepage.class);
-                        startActivity(i);
-                    
+                    // Navigate back
+                    Intent i = new Intent(adduser.this, admin_homepage.class);
+                    startActivity(i);
+
                 }
             });
-
         });
     }
 }

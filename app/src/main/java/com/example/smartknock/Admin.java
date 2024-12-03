@@ -9,7 +9,7 @@ public class Admin {
     private String name;
     private String email;
     private String password; // Added password attribute
-    private List<User> users; // List to store associated users
+   // private List<User> users; // List to store associated users
 
     // Constructor
     public Admin(String id,String name, String email, String password) {
@@ -17,12 +17,12 @@ public class Admin {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.users = new ArrayList<>(); // Initialize user list
+        //this.users = new ArrayList<>(); // Initialize user list
     }
 
     // No-arg constructor (required for Firestore)
     public Admin() {
-        this.users = new ArrayList<>(); // Ensure list is initialized
+        //this.users = new ArrayList<>(); // Ensure list is initialized
     }
 
     // Getters and Setters
@@ -53,17 +53,17 @@ public class Admin {
         this.password = password;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    public void addUser(User user) {
-        this.users.add(user); // Add a user to the list
-    }
+//    public List<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(List<User> users) {
+//        this.users = users;
+//    }
+//
+//    public void addUser(User user) {
+//        this.users.add(user); // Add a user to the list
+//    }
 }
 /*
 public class Admin {

@@ -98,6 +98,27 @@ public class feedback extends AppCompatActivity {
                 finish();
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear user session data from SharedPreferences (if used)
+                getSharedPreferences("UserSession", MODE_PRIVATE)
+                        .edit()
+                        .clear() // Clear all session-related data
+                        .apply(); // Apply changes
+
+                // Show a toast message to confirm logout
+                Toast.makeText(feedback.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+                // Redirect user to the login screen
+                Intent intent = new Intent(feedback.this, login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+                startActivity(intent);
+
+                // Finish the current activity
+                finish();
+            }
+        });
         // Similarly, set up other buttons for navigation
     }
 }

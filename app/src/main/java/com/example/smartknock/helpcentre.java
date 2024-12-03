@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -57,6 +58,26 @@ public class helpcentre extends AppCompatActivity {
                 finish();
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear user session data from SharedPreferences (if used)
+                getSharedPreferences("UserSession", MODE_PRIVATE)
+                        .edit()
+                        .clear() // Clear all session-related data
+                        .apply(); // Apply changes
 
+                // Show a toast message to confirm logout
+                Toast.makeText(helpcentre.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+                // Redirect user to the login screen
+                Intent intent = new Intent(helpcentre.this, login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+                startActivity(intent);
+
+                // Finish the current activity
+                finish();
+            }
+        });
     }
 }

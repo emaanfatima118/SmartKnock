@@ -1,57 +1,106 @@
-package com.example.smartknock;/*package com.example.doorbell;
+package com.example.smartknock;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class setdev extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-    EditText devicePinInput, devicePasswordInput;
-    Button saveDeviceSetupButton;
-    UserController userController;
-    String userId;
+public class setdev extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private String userId;
+    private DeviceController deviceController;
+
+    private EditText deviceIdEditText;
+    private EditText pinEditText;
+    private Button connectButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setdev);
 
+        // Initialize Firebase Auth and Device Controller
+        mAuth = FirebaseAuth.getInstance();
+        deviceController = new DeviceController();
+
+        // Get the userId from FirebaseAuth
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        } else {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Initialize UI components
-        devicePinInput = findViewById(R.id.box1);
-        devicePasswordInput = findViewById(R.id.box2);
-        saveDeviceSetupButton = findViewById(R.id.associateButton);
+        deviceIdEditText = findViewById(R.id.box1); // Assuming EditText for device ID
+        pinEditText = findViewById(R.id.box2); // Assuming EditText for PIN
+        connectButton = findViewById(R.id.associateButton); // Assuming Button for connect action
 
-        // Initialize UserController
-        userController = new UserController();
+        // Set click listener for the connect button
+        connectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the device ID and PIN from the EditTexts
+                String deviceId = deviceIdEditText.getText().toString();
+                String pinString = pinEditText.getText().toString(); // Get PIN as string
 
-        // Get the userId from intent (passed after signup)
-        userId = getIntent().getStringExtra("userId");
+                // Validate the inputs
+                if (deviceId.isEmpty() || pinString.isEmpty()) {
+                    Toast.makeText(setdev.this, "Please enter both device ID and PIN", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        // Save device setup
-        saveDeviceSetupButton.setOnClickListener(view -> {
-            String pin = devicePinInput.getText().toString().trim();
-            String devicePassword = devicePasswordInput.getText().toString().trim();
+                // Parse PIN to integer with error handling
+                Integer pin = null;
+                try {
+                    pin = Integer.parseInt(pinString); // Try parsing PIN as integer
+                } catch (NumberFormatException e) {
+                    Toast.makeText(setdev.this, "Invalid PIN entered", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method if PIN is not valid
+                }
 
-            if (pin.isEmpty() || devicePassword.isEmpty()) {
-                Toast.makeText(setdev.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                return;
+                // Set the status (assuming true for now)
+                boolean status = true;
+
+                // Call method to connect device to user
+                connectDeviceToUser(deviceId, pin, status);
+            }
+        });
+    }
+
+    // Function to connect device to user
+    private void connectDeviceToUser(String deviceId, int pin, boolean status) {
+        if (userId == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Toast.makeText(this, "Connecting Device. ID: " + deviceId + ", PIN: " + pin + ", Status: " + status, Toast.LENGTH_SHORT).show();
+        // Log device details for debugging
+        // Log.d("setdev", "Connecting device with ID: " + deviceId + " and PIN: " + pin);
+
+        // Use DeviceController to connect the device
+        deviceController.connectDevice(userId, deviceId, pin, status, new DatabaseCallback() {
+            @Override
+            public void onSuccess(String successMessage) {
+                // Navigate to homepage after success
+                Intent intent = new Intent(setdev.this, homepage.class);
+                intent.putExtra("connectedDeviceId", deviceId); // Pass the connected device ID
+                startActivity(intent);
+                finish(); // Close the current activity
             }
 
-            userController.updateDeviceSetup(userId, pin, devicePassword, new SignupCallback() {
-                @Override
-                public void onSignupResult(boolean isSuccess, String message) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(setdev.this, message, Toast.LENGTH_SHORT).show();
-                        if (isSuccess) {
-                            finish(); // Close activity on success
-                        }
-                    });
-                }
-            });
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(setdev.this, "Failed to connect device: " + error, Toast.LENGTH_LONG).show();
+            }
         });
     }
 }
-*/

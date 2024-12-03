@@ -68,46 +68,46 @@
         android:textColor="@color/black"
         android:paddingStart="20dp"
         android:layout_below="@id/signupEmail"/>
-    <EditText
-        android:id="@+id/box1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Enter Device ID"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:inputType="textPassword"
-        android:textColorHint="#98090909"
-        android:background="@drawable/edittext"
-        android:backgroundTint="@color/white"
-        android:drawableStart="@drawable/locklogin"
-        android:drawablePadding="15dp"
-        android:textColor="@color/black"
-        android:paddingStart="20dp"
-        android:layout_below="@id/signupPassword"/>
-    <EditText
-        android:id="@+id/box2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="Set Device PIN"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:inputType="textPassword"
-        android:textColorHint="#98090909"
-        android:background="@drawable/edittext"
-        android:backgroundTint="@color/white"
-        android:drawableStart="@drawable/locklogin"
-        android:drawablePadding="15dp"
-        android:textColor="@color/black"
-        android:paddingStart="20dp"
-        android:layout_below="@id/box1"/>
+<!--    <EditText-->
+<!--        android:id="@+id/box1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:hint="Enter Device ID"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:textColorHint="#98090909"-->
+<!--        android:background="@drawable/edittext"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:drawableStart="@drawable/locklogin"-->
+<!--        android:drawablePadding="15dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:paddingStart="20dp"-->
+<!--        android:layout_below="@id/signupPassword"/>-->
+<!--    <EditText-->
+<!--        android:id="@+id/box2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:hint="Set Device PIN"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:textColorHint="#98090909"-->
+<!--        android:background="@drawable/edittext"-->
+<!--        android:backgroundTint="@color/white"-->
+<!--        android:drawableStart="@drawable/locklogin"-->
+<!--        android:drawablePadding="15dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:paddingStart="20dp"-->
+<!--        android:layout_below="@id/box1"/>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="10dp"
         android:id="@+id/l1"
-        android:layout_below="@+id/box2"
+        android:layout_below="@+id/signupPassword"
         >
         <CheckBox
             android:id="@+id/adminCheckBox"

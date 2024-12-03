@@ -13,9 +13,13 @@
         android:theme="@style/Theme.SMARTKNOCK"
         tools:targetApi="31">
         <activity
+            android:name=".setdevprimary"
+            android:exported="false" />
+        <activity
             android:name=".admin_homepage"
             android:exported="false" />
-        <activity android:name=".management"
+        <activity
+            android:name=".management"
             android:exported="false" />
         <activity
             android:name=".notify"
@@ -23,22 +27,15 @@
         <activity
             android:name=".dnd"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".setdev"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".setdev"
+            android:exported="false" />
         <activity
             android:name=".adduser"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".admin_homepage"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".feedbackitem"-->
-<!--            android:exported="false"-->
-<!--            android:theme="@style/Theme.DOORBELL" />-->
-<!--        <activity-->
-<!--            android:name=".feedbackadmin"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".feedbackadmin"
+            android:exported="false" />
         <activity
             android:name=".nameKnownVisitor"
             android:exported="false" />
@@ -69,21 +66,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--      <service-->
-<!--        android:name=".VisitorNotificationService"-->
-<!--        android:exported="true">-->
-<!--        <intent-filter>-->
-<!--            <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--        </intent-filter>-->
-<!--    </service>-->
-
     </application>
 
 </manifest>

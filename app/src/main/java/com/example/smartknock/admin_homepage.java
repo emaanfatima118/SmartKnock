@@ -3,7 +3,9 @@ package com.example.smartknock;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,10 +21,11 @@ import java.util.List;
 
 public class admin_homepage extends AppCompatActivity {
 
+    ImageButton logout,feedback;
         private RecyclerView recyclerView;
         private UserAdapter userAdapter;
         private List<User> userList;
-
+        private AuthenticationHelper authhelp;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -38,10 +41,12 @@ public class admin_homepage extends AppCompatActivity {
             userAdapter = new UserAdapter(userList);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(userAdapter);
-
+            logout = findViewById(R.id.logoutButton);
+            feedback = findViewById(R.id.feedbackButton);
             // Fetch users from Firestore
-            DatabaseHelper dbHelper = new DatabaseHelper();
-            dbHelper.readUsers(new DatabaseHelper.DataStatus() {
+
+            authhelp= new AuthenticationHelper();
+            authhelp.readUsers(new AuthenticationHelper.DataStatus() {
                 @Override
                 public void DataIsLoaded(List<User> users, String message) {
                     if (users != null) {
@@ -64,7 +69,35 @@ public class admin_homepage extends AppCompatActivity {
                     Toast.makeText(admin_homepage.this, s, Toast.LENGTH_SHORT).show();
                 }
             });
+            feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(admin_homepage.this, feedbackadmin.class);
+                    startActivity(i);
+                    finish();
+                }
+            });
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Clear user session data from SharedPreferences (if used)
+                    getSharedPreferences("UserSession", MODE_PRIVATE)
+                            .edit()
+                            .clear() // Clear all session-related data
+                            .apply(); // Apply changes
 
+                    // Show a toast message to confirm logout
+                    Toast.makeText(admin_homepage.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+                    // Redirect user to the login screen
+                    Intent intent = new Intent(admin_homepage.this, login.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+                    startActivity(intent);
+
+                    // Finish the current activity
+                    finish();
+                }
+            });
             // Add user button click listener
             addUserButton.setOnClickListener(v -> {
                 // Navigate to the adduser activity
@@ -88,20 +121,22 @@ public class admin_homepage extends AppCompatActivity {
                         userList.remove(which);
                         userAdapter.notifyItemRemoved(which);
 
-                        dbHelper.deleteUser(selectedUser.getId(), new DatabaseHelper.DataStatus() {
+                        authhelp.deleteUser(selectedUser.getId(), new AuthenticationHelper.DataStatus() {
                             @Override
                             public void DataIsLoaded(List<User> users, String message) {
-                                // Optionally handle this case if needed
+
                             }
 
                             @Override
                             public void onFailure(String message) {
                                 Toast.makeText(admin_homepage.this, "Error removing user: " + message, Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
-                            public void onSuccess(String message) {
+                            public void onSuccess(String s) {
                                 Toast.makeText(admin_homepage.this, "User removed successfully.", Toast.LENGTH_SHORT).show();
+
                             }
                         });
 

@@ -101,39 +101,77 @@ public class nameKnownVisitor extends AppCompatActivity {
         });
     }
 
-    /**
-     * Save the visitor's name to Firebase.
-     */
-    private void saveVisitorName() {
-        String visitorName = visitorNameInput.getText().toString().trim(); // Get user input
+//    protected void saveVisitorName() {
+//        String visitorName = visitorNameInput.getText().toString().trim(); // Get user input
+//
+//        if (visitorName.isEmpty()) {
+//            // Check for empty input
+//            Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show();
+//            return; // Exit the method if input is invalid
+//        }
+//
+//        // Use VisitorController to update the visitor's name
+//        visitorController.updateVisitorName(visitorId, visitorName, new VisitorCallback() {
+//            @Override
+//            public void onVisitorFetched(VisitorView visitor) {
+//                // Success callback
+//                Toast.makeText(nameKnownVisitor.this, "Name updated successfully", Toast.LENGTH_SHORT).show();
+//
+//                // Pass the updated name and ID back to the calling activity
+//                Intent resultIntent = new Intent();
+//                resultIntent.putExtra("updatedVisitorId", visitorId);
+//                resultIntent.putExtra("updatedVisitorName", visitorName);
+//                setResult(RESULT_OK, resultIntent); // Send result
+//                finish(); // Return to the calling activity
+//            }
+//
+//            @Override
+//            public void onVisitorsFetched(List<VisitorView> visitors) {
+//                // Not used here
+//            }
+//
+//            @Override
+//            public void onError(String errorMessage) {
+//                // Handle error
+//                Toast.makeText(nameKnownVisitor.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+protected void saveVisitorName() {
+    String visitorName = visitorNameInput.getText().toString().trim(); // Get user input
 
-        if (visitorName.isEmpty()) {
-            // Check for empty input
-            Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show();
-            return; // Exit the method if input is invalid
+    if (visitorName.isEmpty()) {
+        // Check for empty input
+        Toast.makeText(this, "Please enter a name", Toast.LENGTH_SHORT).show();
+        return; // Exit the method if input is invalid
+    }
+
+    // Use VisitorController to update the visitor's name
+    visitorController.updateVisitorName(visitorId, visitorName, new VisitorCallback() {
+        @Override
+        public void onVisitorFetched(VisitorView visitor) {
+            // Success callback
+            Toast.makeText(nameKnownVisitor.this, "Name updated successfully", Toast.LENGTH_SHORT).show();
+
+            // Pass the updated name and ID back to the calling activity
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("updatedVisitorId", visitorId);
+            resultIntent.putExtra("updatedVisitorName", visitorName);
+            setResult(RESULT_OK, resultIntent); // Send result
+            finish(); // Return to the calling activity
         }
 
-        // Use VisitorController to update the visitor's name
-        visitorController.updateVisitorName(visitorId, visitorName, new VisitorCallback() {
-            @Override
-            public void onVisitorFetched(VisitorView visitor) {
-                // Success callback
-                Toast.makeText(nameKnownVisitor.this, "Name updated successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(nameKnownVisitor.this, visitors.class);
-                startActivity(intent);
-                finish(); // Return to visitors list
-            }
+        @Override
+        public void onVisitorsFetched(List<VisitorView> visitors) {
+            // Not used here
+        }
 
-            @Override
-            public void onVisitorsFetched(List<VisitorView> visitors) {
-                // Not used here
-            }
+        @Override
+        public void onError(String errorMessage) {
+            // Handle error
+            Toast.makeText(nameKnownVisitor.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
+        }
+    });
+}
 
-            @Override
-            public void onError(String errorMessage) {
-                // Handle error
-                Toast.makeText(nameKnownVisitor.this, "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

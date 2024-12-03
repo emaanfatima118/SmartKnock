@@ -2,6 +2,7 @@ package com.example.smartknock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class signup extends AppCompatActivity {
 
     Button loginButton, proceedButton;
-    EditText fullName, email, password, deviceIdInput, pinInput;
-    UserController userController;
-    CheckBox adminCheckbox; // Admin checkbox
+    EditText fullName, email, password;
+    AuthenticationController authController;
+    CheckBox adminCheckbox, userCheckbox; // Admin and User checkboxes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,13 @@ public class signup extends AppCompatActivity {
         fullName = findViewById(R.id.signupUsername);
         email = findViewById(R.id.signupEmail);
         password = findViewById(R.id.signupPassword);
-        deviceIdInput = findViewById(R.id.box1); // Device ID input
-        pinInput = findViewById(R.id.box2); // PIN input (optional for secondary users)
         loginButton = findViewById(R.id.loginButton);
         proceedButton = findViewById(R.id.signupButton);
-        adminCheckbox = findViewById(R.id.adminCheckBox); // Admin checkbox
+        //  adminCheckbox = findViewById(R.id.adminCheckBox);
+        // userCheckbox = findViewById(R.id.userCheckBox);
 
-        // Initialize UserController
-        userController = new UserController();
+        // Initialize AuthenticationController
+        authController = new AuthenticationController();
 
         // Navigate to login screen
         loginButton.setOnClickListener(view -> {
@@ -46,37 +46,33 @@ public class signup extends AppCompatActivity {
             String userName = fullName.getText().toString().trim();
             String userEmail = email.getText().toString().trim();
             String userPassword = password.getText().toString().trim();
-            String deviceId = deviceIdInput.getText().toString().trim();
-            String pin = pinInput.getText().toString().trim();
 
-            // Check if admin checkbox is selected
-            boolean isAdmin = adminCheckbox.isChecked();
-
-            if (isAdmin) {
-                // If admin, only validate name, email, and password
-                if (userName.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty()) {
-                    Toast.makeText(signup.this, "Please fill in all required fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            } else {
-                // For non-admin users, validate all fields including deviceId and pin
-                if (userName.isEmpty() || userEmail.isEmpty() || userPassword.isEmpty() || deviceId.isEmpty()) {
-                    Toast.makeText(signup.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            // Validate inputs
+            if (!validateUsername(userName) || !validateEmail(userEmail) || !validatePassword(userPassword)) {
+                return;
             }
+/*
+            // Ensure one checkbox is selected
+            if (!adminCheckbox.isChecked() && !userCheckbox.isChecked()) {
+                Toast.makeText(signup.this, "Please select either Admin or User", Toast.LENGTH_SHORT).show();
+                return;
+            }
+*/
+            // Determine role based on checkbox
+            // boolean isAdmin = adminCheckbox.isChecked();
+            //    boolean isAdmin=false;
 
-            // Determine if it's a primary user (non-admin with PIN)
-            boolean isPrimaryUser = !isAdmin && !pin.isEmpty();
-
-            // Call signupUser method
-            userController.signupUser(userName, userEmail, userPassword, isAdmin, deviceId, pin, isPrimaryUser, new SignupCallback() {
+            //   boolean isPrimaryUser = userCheckbox.isChecked();
+            boolean isPrimaryUser=false;
+            // Call signup method with appropriate role
+            authController.signupUser(userName, userEmail, userPassword,  isPrimaryUser, new SignupCallback() {
                 @Override
                 public void onSignupResult(boolean isSuccess, String message) {
                     runOnUiThread(() -> {
                         Toast.makeText(signup.this, message, Toast.LENGTH_SHORT).show();
                         if (isSuccess) {
-                            Intent intent = new Intent(signup.this, homepage.class);
+                            // Navigate to homepage after successful signup
+                            Intent intent = new Intent(signup.this,homepage.class);
                             startActivity(intent);
                             finish();
                         }
@@ -85,103 +81,51 @@ public class signup extends AppCompatActivity {
             });
         });
     }
-}
 
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.util.Log;
-//import android.view.View;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.Toast;
-//
-//import androidx.activity.EdgeToEdge;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.core.graphics.Insets;
-//import androidx.core.view.ViewCompat;
-//import androidx.core.view.WindowInsetsCompat;
-//
-//import com.google.firebase.FirebaseApp;
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
-//
-//import java.util.UUID;
-//
-//public class signup extends AppCompatActivity {
-//    Button btn;
-//    Button proceedbtn;
-//    String roll,name,password,email;
-//    EditText Name,Email,Password;
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        if (FirebaseApp.getApps(this).isEmpty()) {
-//            FirebaseApp.initializeApp(this);
-//        }
-//
-//        super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
-//        setContentView(R.layout.activity_signup);
-//        Email = findViewById(R.id.signupEmail);
-//        Password = findViewById(R.id.signupPassword);
-//        Name = findViewById(R.id.signupUsername);
-//
-//        btn=findViewById(R.id.loginButton);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i= new Intent(signup.this, login.class);
-//                Log.d("Firebase", "Data written successfully");
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-//        proceedbtn=findViewById(R.id.signupButton);
-//        proceedbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                name = Name.getText().toString().trim();
-//                password = Password.getText().toString().trim();
-//                email = Email.getText().toString().trim();
-//
-//                if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-//                    Toast.makeText(getApplicationContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                String role = "primary user";
-//                roll = UUID.randomUUID().toString();
-//                userdataholder obj = new userdataholder(roll,name, email, password, role);
-//                FirebaseDatabase db = FirebaseDatabase.getInstance();
-//                DatabaseReference node = db.getReference("user");
-//                node.child(roll).setValue(obj);
-//                node.child(roll).addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        Log.d("Firebase", "Data written successfully");
-//                        Toast.makeText(signup.this, "Data written successfully", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//                        Log.e("Firebase", "Error writing data: " + databaseError.getMessage());
-//                        Toast.makeText(signup.this, "Failed to write data", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//
-//                Name.setText("");
-//                Password.setText("");
-//                Email.setText("");
-//                Toast.makeText(getApplicationContext(), "Registration Successful", Toast.LENGTH_SHORT).show();
-//
-//                Intent i = new Intent(signup.this, homepage.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
-//    }
-//
-//}
+    // Validate username
+    private boolean validateUsername(String username) {
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Username is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (username.length() < 3) {
+            Toast.makeText(this, "Username must be at least 3 characters long", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!username.matches("[a-zA-Z0-9 ]+")) {
+            Toast.makeText(this, "Username can only contain letters, numbers, and spaces", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    // Validate email
+    private boolean validateEmail(String email) {
+        if (email.isEmpty()) {
+            Toast.makeText(this, "Email is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    // Validate password
+    private boolean validatePassword(String password) {
+        if (password.isEmpty()) {
+            Toast.makeText(this, "Password is required", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (password.length() < 4) {
+            Toast.makeText(this, "Password must be at least 4 characters long", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!password.matches(".*[a-zA-Z].*") || !password.matches(".*[0-9].*")) {
+            Toast.makeText(this, "Password must contain at least one letter and one number", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+}

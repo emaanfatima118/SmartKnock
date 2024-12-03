@@ -1,5 +1,7 @@
 package com.example.smartknock;
 
+import static android.text.format.DateUtils.formatDateTime;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +12,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.Base64;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class visitorDetails extends AppCompatActivity {
 
@@ -23,8 +45,16 @@ public class visitorDetails extends AppCompatActivity {
     ImageView visitorImage;
     TextView visitorName;
     TextView visitTime;
+
     ImageButton helpp, settings, feedback, logout, back;
-    VisitorController visitorController; // Controller for fetching visitor data
+    VisitorController visitorController;
+
+    private ImageView imageView;
+    private DatabaseReference databaseReference;
+
+    FirebaseFirestore db;
+
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,98 +74,172 @@ public class visitorDetails extends AppCompatActivity {
         visitorName = findViewById(R.id.visitor_name);
         visitTime = findViewById(R.id.visit_time);
 
-        // Initialize the VisitorController
+        // Initialize VisitorController
         visitorController = new VisitorController();
 
-        // Get the visitorId from the Intent
+        imageView = findViewById(R.id.visitor_image);
+
+        db = FirebaseFirestore.getInstance();
+
+
+        // Get visitorId from the Intent
         Intent intent = getIntent();
         String visitorId = intent.getStringExtra("visitorId");
+
         if (visitorId != null) {
             fetchVisitorDetails(visitorId);
         } else {
             Toast.makeText(this, "Visitor ID not provided", Toast.LENGTH_SHORT).show();
         }
 
-        // Edit visitor name
+        // Set up button listeners
         editVisitorName.setOnClickListener(v -> {
             Intent intent1 = new Intent(visitorDetails.this, nameKnownVisitor.class);
-            intent1.putExtra("visitorId", visitorId); // Pass the visitorId to the next activity
+            intent1.putExtra("visitorId", visitorId); // Pass visitorId to next activity
             startActivity(intent1);
             finish();
         });
 
-        backToVisitorList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(visitorDetails.this, visitors.class);
-                startActivity(intent);
-                finish();
-            }
+        backToVisitorList.setOnClickListener(v -> {
+            Intent intent1 = new Intent(visitorDetails.this, visitors.class);
+            startActivity(intent1);
+            finish();
         });
 
-        helpp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(visitorDetails.this, helpcentre.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(visitorDetails.this, homepage.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(visitorDetails.this, settings.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(visitorDetails.this, feedback.class);
-                startActivity(i);
-                finish();
-            }
-        });
-
+        // Call setupNavigation to handle navigation buttons
+        setupNavigation();
+        //imagedisplay(base64);
     }
 
     private void fetchVisitorDetails(String visitorId) {
-        visitorController.getVisitorById(visitorId, new VisitorCallback() {
-            @Override
-            public void onVisitorFetched(VisitorView visitor) {
-                visitorName.setText(visitor.getName() != null ? visitor.getName() : "Unknown Visitor");
-                visitTime.setText("Visit Time: " + visitor.getDatetime().toString());
+        db.collection("visitors")
+                .document(visitorId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        // Fetch visitor name
+                        String name = documentSnapshot.getString("visitorName");
+                        visitorName.setText(name != null ? name : "Unknown Visitor");
 
-                // Set visitor image
-                if (visitor.getImageUrl() != null && !visitor.getImageUrl().isEmpty()) {
-                    Glide.with(visitorDetails.this)
-                            .load(visitor.getImageUrl())
-                            .placeholder(R.drawable.ic_default_user)
-                            .into(visitorImage);
-                } else {
-                    visitorImage.setImageResource(R.drawable.ic_default_user);
-                }
-            }
+                        // Fetch visit time (assuming stored as a Firestore Timestamp)
+                        com.google.firebase.Timestamp timestamp = documentSnapshot.getTimestamp("visitorDateTime");
+                        if (timestamp != null) {
+                            // Convert Firestore Timestamp to Date and format it
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                            String formattedDate = sdf.format(timestamp.toDate());
+                            visitTime.setText("Visit Time: " + formattedDate);
+                        } else {
+                            visitTime.setText("Visit Time: No Date");
+                        }
 
-            @Override
-            public void onVisitorsFetched(List<VisitorView> visitors) {
-                // Not used here
-            }
+                        // Fetch visitor image as a Base64 string
+                        String visitorImageBase64 = documentSnapshot.getString("visitorImage");
+                        if (visitorImageBase64 != null && !visitorImageBase64.isEmpty()) {
+                            imagedisplay(visitorImageBase64);
+                        } else {
+                            visitorImage.setImageResource(R.drawable.ic_default_user);
+                        }
+                    } else {
+                        Toast.makeText(visitorDetails.this, "Error: Visitor not found", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(visitorDetails.this, "Error fetching visitor details: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+//private void fetchVisitorDetails(String visitorId) {
+//    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//    // Fetch visitor data from Firestore using visitorId
+//    db.collection("visitors").document(visitorId).get()
+//            .addOnSuccessListener(document -> {
+//                if (document.exists()) {
+//                    String name = document.getString("visitorName");
+//                    String dateTime = document.getString("visitorDateTime");
+//                    String imageBase64 = document.getString("visitorImage");
+//
+//                    // Set visitor name only if it's not already set
+//                    if (name != null && !name.isEmpty()) {
+//                        visitorName.setText(name);
+//                    } else {
+//                        visitorName.setText("Unknown Visitor");
+//                    }
+//
+//                    // Format and display visit time
+//                    visitTime.setText("Visit Time: " + (dateTime != null ? formatDateTime(dateTime) : "No Date"));
+//
+//                    // Decode and display image
+//                    if (imageBase64 != null && !imageBase64.isEmpty()) {
+//                        imagedisplay(imageBase64);
+//                    } else {
+//                        visitorImage.setImageResource(R.drawable.ic_default_user);
+//                    }
+//                } else {
+//                    Toast.makeText(visitorDetails.this, "Visitor not found", Toast.LENGTH_SHORT).show();
+//                }
+//            })
+//            .addOnFailureListener(e -> {
+//                Toast.makeText(visitorDetails.this, "Error fetching visitor: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            });
+//}
+    private String formatDateTime(String dateTime) {
+        try {
+            // Parse the original date string into a Date object
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            Date date = inputFormat.parse(dateTime);
 
-            @Override
-            public void onError(String errorMessage) {
-                Toast.makeText(visitorDetails.this, errorMessage, Toast.LENGTH_SHORT).show();
-            }
+            // Format the Date object into a more readable format
+            SimpleDateFormat outputFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.getDefault());
+            return outputFormat.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Invalid Date Format"; // In case of an error, return a fallback message
+        }
+    }
+
+    private void imagedisplay(String base64){
+        byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        visitorImage.setImageBitmap(decodedByte);
+    }
+
+    private void setupNavigation() {
+        // Handle Help Center navigation
+        helpp.setOnClickListener(view -> {
+            Intent intent = new Intent(visitorDetails.this, helpcentre.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Handle Settings navigation
+        settings.setOnClickListener(view -> {
+            Intent intent = new Intent(visitorDetails.this, settings.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Handle Feedback navigation
+        feedback.setOnClickListener(view -> {
+            Intent intent = new Intent(visitorDetails.this, feedback.class);
+            startActivity(intent);
+            finish();
+        });
+
+        // Handle Logout
+        logout.setOnClickListener(view -> {
+            getSharedPreferences("UserSession", MODE_PRIVATE)
+                    .edit()
+                    .clear()
+                    .apply();
+
+            Toast.makeText(visitorDetails.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(visitorDetails.this, login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
     }
+
 
 }

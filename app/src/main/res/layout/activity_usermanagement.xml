@@ -1,277 +1,116 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:id="@+id/usermanagement"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".management"
-    android:background="#228CFC">
-    <LinearLayout
-        android:orientation="horizontal"
+    android:background="#228CFC"
+    tools:context=".management">
+    <TextView
+        android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="86dp"
+        android:background="@color/white"/>
 
-        android:layout_marginBottom="20dp"
-        android:background="#1C024B">
-        <ImageView
-            android:id="@+id/btn2"
-            android:layout_width="32dp"
-            android:layout_height="30dp"
-            android:src="@drawable/back"
-
-            />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Management"
-        android:textSize="24sp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-    </LinearLayout>
-    <!-- User Profiles Section -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:id="@+id/l1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_black"
+        android:text="Device Connection"
+        android:layout_centerHorizontal="true"
+        android:textColor="#228CFC"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <!-- Device Connection Section -->
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/b1"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="20dp">
+        android:layout_below="@id/header_title"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true"
+        android:text="Connect to a Device"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_regular"
+        android:background="@drawable/button_background" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="User Profiles"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
-
+    <FrameLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:paddingTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:background="@drawable/family"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Family Profile"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:textColor="@color/white"
-                android:background="@drawable/bbutton_background"
-                android:layout_marginLeft="70dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:src="@drawable/guest"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Guest Profile"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit"
-                android:textColor="@color/white"
-                android:background="@drawable/bbutton_background"
-                android:layout_marginLeft="70dp" />
-        </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
-
-        <ImageView
-            android:src="@drawable/remove"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="10dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remove User"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Confirm"
-            android:background="@drawable/bbutton_background"
-            android:textColor="@color/white"
-            android:layout_marginLeft="70dp" />
-    </LinearLayout>
-    </LinearLayout>
-    <!-- Access Control Section -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Access Control"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <ImageView
-                android:src="@drawable/time"
+            >
+            <ImageButton
+                android:id="@+id/homeButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/home"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+
+            <ImageButton
+                android:id="@+id/visitorButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/doorbell"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/feedbackButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/feedback"
+                android:contentDescription="@null"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+
+            <ImageButton
+                android:id="@+id/helpcenterButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@null"
+                android:src="@drawable/helpcenter"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
+            <ImageButton
+                android:id="@+id/settingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/settingsblue"
+                android:background="@color/white"
+                android:contentDescription="@null"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time Restrictions"
-                android:layout_marginLeft="20dp"
-                android:textSize="15sp"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"/>
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Invitations Section -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Invitations"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"/>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:src="@drawable/email"
+            <ImageButton
+                android:id="@+id/logoutButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="10dp"/>
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:id="@+id/emailEditText"
-                android:layout_height="wrap_content"
-                android:text="Send Email Invitation"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/black"
-                android:textSize="15sp"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/emailInviteButton"
-                android:text="Send"
-                android:textColor="@color/white"
-                android:background="@drawable/bbutton_background"
-                android:layout_marginLeft="30dp" />
+                android:contentDescription="@null"
+                android:src="@drawable/logout"
+                android:background="@color/white"
+                android:importantForAccessibility="no"
+                android:layout_marginStart="10dp"/>
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
-            <ImageView
-                android:src="@drawable/sms"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send SMS Invitation"
-                android:layout_marginLeft="20dp"
-                android:textSize="15sp"
-                android:textColor="@color/black"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Send"
-                android:textColor="@color/white"
-                android:background="@drawable/bbutton_background"
-                android:layout_marginLeft="37dp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- User Management Section -->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp">
-
-
-    </LinearLayout>
-</LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

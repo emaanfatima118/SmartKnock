@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -17,10 +18,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class management extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-    private PrimaryUserBehavior primaryUserBehavior;
-    private SecondaryUserBehavior secondaryUserBehavior;
+public class management extends AppCompatActivity {
+    ImageButton back;
+    ImageButton settings,visitors,logout,feedback;
+
+    private FirebaseFirestore firestore;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -32,41 +38,115 @@ public class management extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // Retrieve email and password from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String primaryUserEmail = sharedPreferences.getString("primaryUserEmail", "");
-        String primaryUserPassword = sharedPreferences.getString("primaryUserPassword", "");
-
-        if (!primaryUserEmail.isEmpty() && !primaryUserPassword.isEmpty()) {
-            // Initialize behaviors with email and password
-            primaryUserBehavior = new PrimaryUserBehavior(primaryUserEmail, primaryUserPassword);
-            secondaryUserBehavior = new SecondaryUserBehavior();
-        }
-
-        // Back Button functionality
-    ImageView backButton = findViewById(R.id.btn2);
-        backButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // Navigate back
-            Intent i= new Intent(management.this,settings.class);
-            startActivity(i);
-        }
-    });
-        // Get the EditText view for the email
-        EditText emailEditText = findViewById(id.emailEditText);  // Replace R.id.emailEditText with your actual EditText ID
-
-        // Handle "Send Email Invitation" button click
-        Button emailButton = findViewById(R.id.emailInviteButton);
-        emailButton.setOnClickListener(v -> {
-            String email = emailEditText.getText().toString().trim();  // Get email from EditText
-            if (!email.isEmpty()) {
-                primaryUserBehavior.sendEmailInvitation(email);
-            } else {
-                // Handle empty email input
-                Toast.makeText(management.this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+        // Initialize Firebase instances
+        firestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        back=findViewById(R.id.homeButton);
+        settings = findViewById(R.id.settingsButton);
+        visitors = findViewById(R.id.visitorButton);
+        logout = findViewById(R.id.logoutButton);
+        feedback = findViewById(R.id.feedbackButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(management.this, homepage.class);
+                startActivity(i);
+                finish();
             }
         });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(management.this, settings.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        visitors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(management.this, visitors.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(management.this, feedback.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+
+        // "Connect to Device" button functionality
+        Button connectToDeviceButton = findViewById(R.id.b1);
+        connectToDeviceButton.setOnClickListener(v -> {
+            // Navigate to DeviceConnectionActivity
+            fetchUserTypeAndNavigate();
+            //     Intent intent = new Intent(management.this, setdevprimary.class);
+            //   startActivity(intent);
+        });
+
+
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear user session data from SharedPreferences (if used)
+                getSharedPreferences("UserSession", MODE_PRIVATE)
+                        .edit()
+                        .clear() // Clear all session-related data
+                        .apply(); // Apply changes
+
+                // Show a toast message to confirm logout
+                Toast.makeText(management.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+                // Redirect user to the login screen
+                Intent intent = new Intent(management.this, login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear activity stack
+                startActivity(intent);
+
+                // Finish the current activity
+                finish();
+            }
+        });
+    }
+    private void fetchUserTypeAndNavigate() {
+        // Get the currently logged-in user
+        String userId = mAuth.getCurrentUser().getUid();
+
+        // Fetch the userType from Firestore
+        firestore.collection("users")
+                .document(userId)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String userType = documentSnapshot.getString("userType");
+                        if (userType != null) {
+                            if (userType.equalsIgnoreCase("PrimaryUser")) {
+                                // Navigate to the Primary user activity
+                                Intent intent = new Intent(management.this, setdevprimary.class);
+                                startActivity(intent);
+                                finish();
+                            } else if (userType.equalsIgnoreCase("SecondaryUser")) {
+                                // Navigate to the Secondary user activity
+                                Intent intent = new Intent(management.this, setdev.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(management.this, "Unknown user type.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(management.this, "User type not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(management.this, "User not found in Firestore.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(management.this, "Error fetching user data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 }

@@ -14,4 +14,9 @@ public class FeedbackController {
         // Pass the feedback data to the FeedbackManager
         feedbackManager.submitFeedback(feedbackMessage, rating, currentUser, callback);
     }
+
+    // Fetch feedback with user names
+    public void fetchFeedbacks(FeedbackAdminCallback callback) {
+        feedbackManager.fetchFeedbackWithUsernames(callback);
+    }
 }

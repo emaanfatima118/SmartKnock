@@ -117,12 +117,12 @@
 
 package com.example.smartknock;
 
-import androidx.annotation.NonNull;
+
+import android.util.Log;
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -134,9 +134,11 @@ public class VisitorManager {
     private final List<VisitorView> visitors;
     private final DatabaseHelper databaseHelper;
 
+
     private VisitorManager() {
         visitors = new ArrayList<>();
         databaseHelper = new DatabaseHelper(); // Firestore-based helper
+
     }
 
     public static synchronized VisitorManager getInstance() {
@@ -178,13 +180,34 @@ public class VisitorManager {
                 .addOnFailureListener(e -> callback.onError("Error fetching visitor: " + e.getMessage()));
     }
 
+//    public void updateVisitorName(String visitorId, String newName, VisitorCallback callback) {
+//        databaseHelper.getCollectionReference("visitors").document(visitorId)
+//                .update("visitorName", newName)
+//                .addOnSuccessListener(aVoid -> callback.onVisitorFetched(null)) // Successfully updated
+//                .addOnFailureListener(e -> callback.onError("Error updating name: " + e.getMessage()));
+//    }
     public void updateVisitorName(String visitorId, String newName, VisitorCallback callback) {
-        databaseHelper.getCollectionReference("visitors").document(visitorId)
-                .update("visitorName", newName)
-                .addOnSuccessListener(aVoid -> callback.onVisitorFetched(null)) // Successfully updated
-                .addOnFailureListener(e -> callback.onError("Error updating name: " + e.getMessage()));
-    }
+        // Reference the Firestore collection and document
+        FirebaseFirestore firestore;
+        firestore = FirebaseFirestore.getInstance();
+        firestore.collection("visitors")
+                .document(visitorId)
+                .update("visitorName", newName) // Update the visitor's name
+                .addOnSuccessListener(aVoid -> {
+                    Log.d("Firestore", "Visitor name updated successfully: " + visitorId);
 
+                    // Create a mock visitor object with updated details
+                    VisitorView updatedVisitor = new VisitorView(visitorId, false, null, null);
+                    updatedVisitor.setName(newName);
+
+                    // Pass the updated visitor object back via the callback
+                    callback.onVisitorFetched(updatedVisitor);
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Firestore", "Error updating visitor name: " + e.getMessage());
+                    callback.onError("Failed to update visitor name: " + e.getMessage());
+                });
+    }
     public void addNewVisitor(String name, boolean isFrequent, Date visitTime, String imageUrl) {
         String id = UUID.randomUUID().toString();
         VisitorView visitor = new VisitorView(id, isFrequent, visitTime, imageUrl);

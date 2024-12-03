@@ -59,8 +59,9 @@
         android:layout_height="match_parent"
         android:layout_below="@id/searchBar"
         android:layout_marginTop="30dp"
+        android:layout_above="@id/button_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/button_container" />
 
     <FrameLayout
         android:id="@+id/button_container"

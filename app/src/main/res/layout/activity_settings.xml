@@ -19,7 +19,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/montserrat_black"
             android:text="Settings"
-            android:layout_marginHorizontal="130dp"
+            android:layout_marginHorizontal="100dp"
             android:textColor="#228CFC"
             android:textSize="30sp"
             android:textStyle="bold"/>
@@ -72,11 +72,11 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_weight="1"
-            android:text="User Management"
-            android:textSize="18sp"
-            android:paddingRight="80dp"
             android:background="@drawable/btn"
-            android:textColor="@color/white" />
+            android:paddingRight="80dp"
+            android:text="Device Management"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- DND Mode -->
@@ -105,37 +105,12 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-    <!-- Visitor Settings -->
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_marginBottom="12dp"-->
-<!--        android:gravity="center_vertical">-->
-
-<!--        <ImageView-->
-<!--            android:layout_width="48dp"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:src="@drawable/vis"-->
-<!--            android:layout_marginEnd="12dp" />-->
-
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/btn_visitor_settings"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="80dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="Visitor Settings"-->
-<!--            android:textSize="18sp"-->
-<!--            android:paddingRight="90dp"-->
-<!--            android:background="@drawable/btn"-->
-<!--            android:textColor="@color/white" />-->
-<!--    </LinearLayout>-->
     <FrameLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         android:layout_height="96dp"
-        android:layout_marginTop="335dp"
+        android:layout_marginTop="340dp"
         android:paddingTop="20dp"
         android:background="@color/white">
         <LinearLayout
